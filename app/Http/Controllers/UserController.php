@@ -21,6 +21,6 @@ class UserController extends Controller
     }
 
     function adminlogin(){
-        return view('admin.login');
+        return view('admin.login');//inside view->admin->login
     }
 }
