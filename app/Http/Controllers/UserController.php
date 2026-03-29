@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class UserController extends Controller
 {
@@ -21,6 +22,17 @@ class UserController extends Controller
     }
 
     function adminlogin(){
-        return view('admin.login');//inside view->admin->login
+        //return view('admin.login');//inside view->admin->login
+        if(View::exists('admin.signup')){//check view exists or not
+            return view('admin.signup');
+        }else{
+            return "No view found";
+        }
+    }
+
+    function userName(){
+        $name="honey";
+        $users=['sarthak','honey','bob'];
+        return view('home',['name'=>$name,'admi'=>$users]);
     }
 }
