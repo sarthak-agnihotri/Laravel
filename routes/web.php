@@ -11,4 +11,6 @@ Route::get('/home',function(){
 });
 
 //dynamic data
-Route::get('/about')
+Route::get('/about',function(){
+    return view('about');
+});
