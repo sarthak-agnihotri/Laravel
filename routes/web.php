@@ -25,3 +25,13 @@ Route::get('about',[UserController::class,'aboutUser']);
 Route::get('user/{name}',[UserController::class,'getUserName']);
 Route::get('admin',[UserController::class,'adminlogin']);
 Route::get('user-login',[UserController::class,'userName']);
+
+
+//Attaching Header
+Route::get('/header-example/{name}',function($name){
+    return response("Hello $name")->header('content-type','text/plain');
+});
+//Dynamic data passing
+Route::get('/check/{name?}',function($name='Guest'){
+    return response("Hello $name")->header('content-type','text/plain');
+});
