@@ -26,7 +26,6 @@ Route::get('user/{name}',[UserController::class,'getUserName']);
 Route::get('admin',[UserController::class,'adminlogin']);
 Route::get('user-login',[UserController::class,'userName']);
 
-
 //Attaching Header
 Route::get('/header-example/{name}',function($name){
     return response("Hello $name")->header('content-type','text/plain');
@@ -34,4 +33,43 @@ Route::get('/header-example/{name}',function($name){
 //Dynamic data passing
 Route::get('/check/{name?}',function($name='Guest'){
     return response("Hello $name")->header('content-type','text/plain');
+});
+//Multiple Header
+Route::get('/multi-header',function(){
+    return response("Hello World")
+    ->header('content-type','text/plain')
+    ->header('x-custom-header','myvalue');
+});
+
+//set Cookie
+Route::get('/set-cookie/{name?}',function($name='Harry'){
+    return response("Hello $name, your cookie has been set!")
+    ->cookie('user_name',$name,0.033);
+});
+
+//JSON
+/*Lightweight: easy to send over the network
+Readable: both humans and machines can understand it
+Cross-platform: can be used in web apps, mobile apps, and other APIs*/
+Route::get('/json-example',function(){
+    return response()->json([
+        'name'=>'John',
+        'age'=>25
+    ]);
+});
+//add status code
+Route::get('/json-exam',function(){
+    return response()->json([
+        'name'=>'John',
+        'age'=>25
+    ],201);
+});
+
+//Adding headers or cookie with json
+Route::get('/json-with-cookie',function(){
+    return response()->json([
+        'message'=>'Hello John'
+    ])
+    ->header('x-custom-header','myvalue')
+    ->cookie('user_name','John',60);
 });
