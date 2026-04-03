@@ -73,3 +73,8 @@ Route::get('/json-with-cookie',function(){
     ->header('x-custom-header','myvalue')
     ->cookie('user_name','John',60);
 });
+
+//Named Routes
+Route::get('/hello',function(){
+    return view('test');
+})->name('test');
