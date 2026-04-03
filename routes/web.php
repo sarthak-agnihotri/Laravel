@@ -78,3 +78,22 @@ Route::get('/json-with-cookie',function(){
 Route::get('/hello',function(){
     return view('test');
 })->name('test');
+
+Route::get('/greet/{id}',function($id){
+    return view('test',['id'=>$id]);
+})->name('greet');
+
+Route::get('/users/{name?}',function($name='GUEST'){
+    return view('test',['name'=>$name]);
+})->name('users');
+
+//Multiple data
+Route::get('/students',function(){
+    $students=['Alice','Bob','Charlie'];
+    return view('test',['students'=>$students]);
+});
+//Multipe data with named route
+Route::get('/students-list',function(){
+    $students=['Alice','Bob','Charlie'];
+    return view('test',['students'=>$students]);
+})->name('students.list');
