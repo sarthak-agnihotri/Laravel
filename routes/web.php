@@ -97,3 +97,9 @@ Route::get('/students-list',function(){
     $students=['Alice','Bob','Charlie'];
     return view('test',['students'=>$students]);
 })->name('students.list');
+
+//using compact function
+Route::get('/compact-students',function(){
+    $students=['Alice','Bob','Charlie'];
+    return view('test',compact('students'));
+})->name('students.compact');
