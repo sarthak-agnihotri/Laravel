@@ -22,3 +22,4 @@
     <li><a href="{{route('students.compact',['name'=>$student])}}">{{$student}}</a></li>
     @endforeach
 </ul>
+

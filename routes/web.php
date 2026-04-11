@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Collection;
 
 Route::get('/', function () {
     return view('welcome');
@@ -103,3 +104,18 @@ Route::get('/compact-students',function(){
     $students=['Alice','Bob','Charlie'];
     return view('test',compact('students'));
 })->name('students.compact');
+
+//Middleware
+Route::get('/check-age',function(){
+    return "You are old enough to access this page.";
+})->middleware('check.age');
+
+Route::get('/details',function(){
+    $students=collect([
+        ['name'=>'Alice','marks'=>85],
+        ['name'=>'Bob','marks'=>92],
+        ['name'=>'Charlie','marks'=>78]
+    ]);
+    $filtered=$students->where('marks','>',80);
+    return view('details',['students'=>$filtered]);
+});
