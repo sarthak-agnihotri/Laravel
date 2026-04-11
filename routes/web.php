@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Collection;
+use App\Http\Controllers\ProductController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -110,6 +111,10 @@ Route::get('/check-age',function(){
     return "You are old enough to access this page.";
 })->middleware('check.age');
 
+Route::get('/dashboard',function(){
+    return view('dashboard');
+})->middleware('check.login');
+
 Route::get('/details',function(){
     $students=collect([
         ['name'=>'Alice','marks'=>85],
@@ -119,3 +124,16 @@ Route::get('/details',function(){
     $filtered=$students->where('marks','>',80);
     return view('details',['students'=>$filtered]);
 });
+//Login and Dashboard
+Route::get('/login',function(){
+    return view('login');
+});
+Route::post('/login',function(){
+    return redirect('/dashboard')->with('message','Login successful!');
+});
+Route::get('/dashboard',function(){
+    return view('dashboard');
+});
+
+//Route resource controller
+Route::resource('products',ProductController::class);

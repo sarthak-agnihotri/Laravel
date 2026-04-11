@@ -12,6 +12,8 @@ class ProductController extends Controller
     public function index()
     {
         //
+        $products=['Laptop','Smartphone','Tablet'];
+        return view('products.index',['products'=>$products]);
     }
 
     /**
@@ -19,7 +21,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('products.create');
     }
 
     /**
@@ -27,7 +29,10 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name=$request->input('name');
+        // Here you would typically save the product to the database
+        // For this example, we'll just return a success message
+        return redirect('/products')->with('message', $name);
     }
 
     /**
@@ -35,7 +40,12 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+         $products=['Laptop','Smartphone','Tablet'];
+         if(isset($products[$id])){
+             return view('products.show',['product'=>$products[$id]]);
+         }else{
+             return redirect('/products')->with('message', 'Product not found!');
+         }
     }
 
     /**
@@ -43,7 +53,16 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $products = ['Laptop','Smartphone','Tablet'];
+
+        if(isset($products[$id])){
+            return view('products.edit', [
+                'id' => $id,
+                'product' => $products[$id]
+            ]);
+        }   else {
+            return redirect('/products')->with('message', 'Product not found!');
+        }
     }
 
     /**
