@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Collection;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -137,3 +138,26 @@ Route::get('/dashboard',function(){
 
 //Route resource controller
 Route::resource('products',ProductController::class);
+
+//NEXT TOPIC: Blade Template Inheritance (Layout System)
+Route::get('/homelayout',function(){
+    return view('homelayout');
+});
+
+//Single Action Controller
+Route::get('/contact',ContactController::class);
+
+//Advanced Routing
+//Named Route with Parameters
+Route::get('/home-page',function(){
+    return "Home Page";
+})->name('home');
+
+//Parameter Constraints
+Route::get('/constraint/{id}',function($id){
+    return "User ID: $id";
+})->where('id','[0-9]+');
+Route::get('/alpha/{name}',function($name){
+    return "Name: $name";
+})->where('name','[A-Za-z]+');
+
