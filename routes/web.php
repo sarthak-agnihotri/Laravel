@@ -200,3 +200,66 @@ Route::post('/save',[FormController::class,'submitform']);
 
 Route::get('/upload-form',[FileUploadController::class,'showUploadForm']);
 Route::post('/upload',[FileUploadController::class,'uploadFile']);
+
+//Cookies
+Route::get('/set-user-cookie',function(){
+    return response("User cookie has been set!")
+    ->cookie('user_name','John Doe',60);
+});
+Route::get('/get-user-cookie',function(Request $request){
+    $userName=$request->cookie('user_name');
+    return "User Name from Cookie: $userName";
+});
+Route::get('/all-cookies',function(Request $request){
+    $cookies=$request->cookies->all();
+    return response()->json($cookies);
+});
+Route::get('/delete-user-cookie',function(){
+    return response("User cookie has been deleted!")
+    ->cookie('user_name',null,-1);
+});
+
+//Exercise 1:
+// Ek cookie banao "preferred_language" jo user select kare - Hindi ya English agar hindi to hindi mai message print ho verna english mai. Agar user invalid language select kare to error message show karo.
+Route::get('/set-language/{lang}',function($lang){
+    if(in_array($lang,['Hindi','english'])){
+        return response("Preferred language set to $lang")
+        ->cookie('preferred_language',$lang,60);
+    }
+    return "Invalid language selected. Please choose 'hindi' or 'english'.";
+});
+Route::get('/greet-user',function(Request $request){
+    $language=$request->cookie('preferred_language','english');
+    if($language=='Hindi'){
+        return "Namaste! Aapka swagat hai.";
+    }
+    return "Hello! Welcome to our website.";
+});
+//Exercise 2:
+// Ek cookie banao "theme" jo user select kare - light ya dark agar light to light theme apply ho verna dark theme apply ho. Agar user invalid theme select kare to error message show karo.
+Route::get('/set-theme/{theme}',function($theme){
+    if(in_array($theme,['light','dark'])){
+        return response("Theme set to $theme")
+        ->cookie('theme',$theme,60);
+    }
+    return "Invalid theme selected. Please choose 'light' or 'dark'.";
+});
+Route::get('/apply-theme',function(Request $request){
+    $theme=$request->cookie('theme','light');
+    if($theme=='dark'){
+        return "Dark theme applied.";
+    }
+    return "Light theme applied.";
+});
+//Exercise 3:
+// Ek cookie banao "visit_count" jo user ke visit count ko track kare. Har bar user site visit kare to count increment ho. Agar count 5 se zyada ho jaye to user ko special offer ka message show karo.
+Route::get('/track-visit',function(Request $request){
+    $visitCount=$request->cookie('visit_count',0);
+    $visitCount++;
+    $response=response("Visit count: $visitCount")
+    ->cookie('visit_count',$visitCount,60);
+    if($visitCount>5){
+        $response->setContent("Visit count: $visitCount. Special offer for you!");
+    }
+    return $response;
+});
