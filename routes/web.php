@@ -6,6 +6,7 @@ use Illuminate\Support\Collection;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\FileUploadController;
 use Illuminate\Http\Request;
 
 // Route::get('/', function () {
@@ -164,17 +165,38 @@ use Illuminate\Http\Request;
 // })->where('name','[A-Za-z]+');
 
 //Request Data-Retrieval+ Old Input
-// Route::get('/form',function(){
-//     return view('simple-form');
-// });
-// Route::post('/save',function(Request $request){
-//     $validated= $request->validate([
-//         'name' => 'required',
-//         'email' => 'required|email:filter',
-//         'message' => 'required'
-//     ]);
+/*Route::get('/form',function(){
+     return view('simple-form');
+});*/
+/* Route::post('/save',function(Request $request){
+     $validated= $request->validate([
+         'name' => 'required',
+         'email' => 'required|email:filter',
+         'message' => 'required'
+     ]);
 
-//     return "Form submitted successfully!";
-// });
+  return "Form submitted successfully!";
+});*/
+
 Route::get('/form',[FormController::class,'showForm']);
 Route::post('/save',[FormController::class,'submitform']);
+
+//Upload Files
+/*Route::get('/upload-form',function(){
+    return view('upload-form');
+});*/
+/*Route::post('/upload',function(Request $request){
+    $request->validate([
+        'file'=>'required|file|mimes:jpg,png,pdf|max:2048'
+    ]);
+    if($request->hasFile('file')){
+        $file=$request->file('file');
+        $pathname=time().'_'.$file->getClientOriginalName();
+        $path=$file->storeAs('uploads',$pathname,'public');
+        return "File uploaded successfully! Path: $path";
+    }
+    return "No file uploaded.";
+});*/
+
+Route::get('/upload-form',[FileUploadController::class,'showUploadForm']);
+Route::post('/upload',[FileUploadController::class,'uploadFile']);
