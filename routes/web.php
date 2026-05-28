@@ -8,6 +8,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FileUploadController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TestMail;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -262,4 +264,14 @@ Route::get('/track-visit',function(Request $request){
         $response->setContent("Visit count: $visitCount. Special offer for you!");
     }
     return $response;
+});
+
+//Sending Mail
+// Route::get('/send-mail',function(){
+//     Mail::to('sarthak.agnihotri2003@gmail.com')->send(new TestMail());
+//     return "Mail Sent Successfully";
+// });
+Route::get('/send-mail',function(){
+    Mail::to('sarthak.agnihotri2003@gmail.com')->send(new TestMail("Dell"));
+    return "Mail Sent Successfully";
 });
