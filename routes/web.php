@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
 use Illuminate\Support\Facades\App;//localization
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentValidationController;
+use App\Http\Controllers\StudentCustomValidationController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -374,4 +377,15 @@ Route::get('/logout',function(){
     return redirect('/login');
 });
 
-//Form Validation
+//Form Validation using CSRF and @Method
+Route::get('/student',[StudentController::class,'create']);
+Route::post('/student',[StudentController::class,'store']);
+Route::put('/student',[StudentController::class,'update']);
+Route::delete('/student',[StudentController::class,'destroy']);
+
+//Form Validation using validation rules
+Route::get('/create',[StudentValidationController::class,'create']);
+Route::post('/show',[StudentValidationController::class,'show']);
+//Form Validation using Custom validation rules
+Route::get('/create',[StudentCustomValidationController::class,'create']);
+Route::post('/show',[StudentCustomValidationController::class,'show']);
