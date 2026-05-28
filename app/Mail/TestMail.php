@@ -50,7 +50,9 @@ class TestMail extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        return [
+            Attachment::fromPath(storage_path('app/public/files/INT 221 Syllabus.pdf'))
+        ];
     }
 }
 //php artisan make:mail TestMail
