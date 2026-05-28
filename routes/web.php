@@ -347,3 +347,31 @@ Route::get('/flash-session',function(){
 Route::get('/show-flash',function(){
     return session('success');
 });
+
+//Full login form 
+Route::get('/login',function(){
+    return view('login-user');
+});
+Route::post('/login-user',function(Request $request){
+    $name=$request->name;
+    $password=$request->password;
+    if($name=="Sarthak"&&$password=="123"){
+        session([
+            "user"=>$name
+        ]);
+        return redirect('/dashboard-session');
+    }
+    return back()->withInput()->with('error','Invalid Login');
+});
+Route::get('/dashboard-session',function(){
+    if(session()->has('user')){
+        return "Welcome ".session('user');
+    }
+    return redirect('/login');
+});
+Route::get('/logout',function(){
+    session()->forget('user');
+    return redirect('/login');
+});
+
+//Form Validation
