@@ -284,3 +284,66 @@ Route::get('/lang/{locale}',function($locale){
 });//What is Localization in Laravel?
 
 //Localization is the process of displaying application content in multiple languages based on user preference.
+
+//storing session
+Route::get('/store-session',function(){
+    session([
+        'name'=>'sarthak'
+    ]);
+    return "Session stored";
+});
+//read session
+Route::get('/read-session',function(){
+    return session('name');
+});
+//delete session
+Route::get('/delete-session',function(){
+    session()->forget('name');
+    return "Session Deleted";
+});
+//Multi-session
+Route::get('/multi-session',function(){
+    session([
+        'name' => 'Sarthak',
+        'city' => 'Delhi',
+        'course' => 'Laravel'
+    ]);
+    return "Multiple Session Stored";
+});
+//access values
+Route::get('/show-session', function () {
+
+    echo session('name');
+    echo "<br>";
+
+    echo session('city');
+    echo "<br>";
+
+    echo session('course');
+
+});
+//check session exists
+Route::get('/check-session', function () {
+
+    if(session()->has('name'))
+    {
+        return "Session Exists";
+    }
+
+    return "Session Not Found";
+
+});
+//delete all session
+Route::get('/flush-session',function(){
+    session()->flush();
+    return "All Session Deleted";
+});
+
+//flash session
+Route::get('/flash-session',function(){
+    session()->flash('success','Data Inserted Successfully');
+    return redirect('/show-flash');
+});
+Route::get('/show-flash',function(){
+    return session('success');
+});
