@@ -10,6 +10,7 @@ use App\Http\Controllers\FileUploadController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\TestMail;
+use Illuminate\Support\Facades\App;//localization
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -275,3 +276,11 @@ Route::get('/send-mail',function(){
     Mail::to('sarthak.agnihotri2003@gmail.com')->send(new TestMail("Dell"));
     return "Mail Sent Successfully";
 });
+
+//Localization lang.
+Route::get('/lang/{locale}',function($locale){
+    App::setLocale($locale);
+    return view('language');
+});//What is Localization in Laravel?
+
+//Localization is the process of displaying application content in multiple languages based on user preference.
