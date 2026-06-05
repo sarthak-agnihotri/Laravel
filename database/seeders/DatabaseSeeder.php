@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use App\Models\User;
+use App\Models\Movie;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -21,6 +22,7 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        $this->call(StudentSeeder::class);
+        // $this->call(StudentSeeder::class);
+        Movie::factory()->count(10)->create();
     }
 }

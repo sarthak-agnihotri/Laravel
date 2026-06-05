@@ -146,12 +146,22 @@ Difference between Query Builder and Eloquent?
 Query Builder works directly with tables.
 Eloquent works through Models and is more object-oriented.
 
+FACTORY
+
+PS C:\Users\Administrator\Practice> php artisan make:factory MovieFactory --model=Movie
+What is a Factory?
+
+Simple definition:
+
+Factory is used to generate fake/dummy data automatically.
+
+phir model file mai 'hasfactory' add karo
 
 
-
-
-
-
+uske baad dataseeder open karo
+import model file at top
+uske baad yeh add kro run mai (Movie::factory()->count(10)->create();)
+uske baad (php artisan migrate:fresh --seed) delete all tables and recreates
 
 
 
