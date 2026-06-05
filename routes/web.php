@@ -15,6 +15,7 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentValidationController;
 use App\Http\Controllers\StudentCustomValidationController;
 use App\Http\Controllers\QueryStudentController;
+use App\Http\Controllers\MovieController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -396,3 +397,9 @@ Route::get('/query-students',[QueryStudentController::class,'showStudents']);
 Route::get('/query-student/{id}', [QueryStudentController::class, 'showSingleStudent']);
 Route::get('/query-update/{id}', [QueryStudentController::class, 'updateStudent']);
 Route::get('/query-delete/{id}', [QueryStudentController::class, 'deleteStudent']);
+
+Route::get('/insert-movie',[MovieController::class,'insertMovie']);
+Route::get('/movies', [MovieController::class, 'showMovies']);
+Route::get('/movie/{id}', [MovieController::class, 'showSingleMovie']);
+Route::get('/update-movie/{id}', [MovieController::class, 'updateMovie']);
+Route::get('/delete-movie/{id}', [MovieController::class, 'deleteMovie']);

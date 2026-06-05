@@ -1,0 +1,143 @@
+pehle model create karo(php artisan make:model Movie)
+phir migration banao(php artisan make:migration create_movies_table)
+1. Create Table
+Schema::create('movies', function (Blueprint $table) {
+});
+
+Creates a new table.
+
+2. Drop Table
+Schema::dropIfExists('movies');
+
+Deletes table during rollback.
+
+3. Rollback
+
+Undo last migration:
+
+php artisan migrate:rollback
+
+Example:
+
+movies table removed
+4. Fresh Migration
+
+Delete all tables and recreate:
+
+php artisan migrate:fresh
+
+Very useful during practice.
+
+5. Fresh + Seed
+php artisan migrate:fresh --seed
+
+Deletes everything, recreates tables, runs seeders.
+
+php artisan migrate
+phir model mai fillable add karo
+uske baad query builder through data insert(php artisan make:controller MovieController)
+Step 2: What is Query Builder?
+
+Simple definition:
+
+Query Builder is Laravel's way of writing SQL queries using PHP methods.
+
+Instead of SQL:
+
+INSERT INTO movies (...)
+
+We write:
+
+DB::table('movies')->insert(...)
+Step 3: Import DB Facade
+
+Open:
+
+app/Http/Controllers/MovieController.php
+
+Add:
+
+use Illuminate\Support\Facades\DB;
+Step 4: Create Insert Method
+Step 5: Create Route
+
+Open:
+
+routes/web.php
+
+Add:
+
+use App\Http\Controllers\MovieController;
+
+Route::get('/insert-movie',[MovieController::class,'insertMovie']);
+Step 6: Run Server
+php artisan serve
+
+Open browser:
+
+http://127.0.0.1:8000/insert-movie
+
+Output:
+
+Movie Inserted Successfully
+Step 7: Verify Data
+
+Open phpMyAdmin.
+
+Open:
+
+movies table
+
+You should see:
+
+id	movie_name	rating
+1	KGF	5
+
+uske baad show all data
+uske baad specific data select ke liye
+
+Query Builder UPDATE
+Goal
+
+Change a movie's rating or name.
+Query Builder DELETE
+
+Add this method in MovieController.php:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# important columns are
+$table->string()
+$table->integer()
+$table->text()
+$table->date()
+$table->boolean()
+$table->timestamps()
+
+Quick Viva Questions
+Q1. What is Migration?
+
+A migration is a PHP file used to create, modify, or delete database tables.
+
+Q2. Command to run migrations?
+php artisan migrate
+Q3. Command to undo last migration?
+php artisan migrate:rollback
+Q4. What does $table->timestamps() create?
+created_at
+updated_at
+Q5. What does $table->id() create?
+Primary Key
+Auto Increment ID
