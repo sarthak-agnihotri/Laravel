@@ -163,6 +163,125 @@ import model file at top
 uske baad yeh add kro run mai (Movie::factory()->count(10)->create();)
 uske baad (php artisan migrate:fresh --seed) delete all tables and recreates
 
+Step 1: Create Seeder
+php artisan make:seeder MovieSeeder
+
+Laravel creates:
+
+database/seeders/MovieSeeder.php
+Step 2: Open MovieSeeder.php
+
+Replace everything inside run() with:
+
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class MovieSeeder extends Seeder
+{
+    public function run(): void
+    {
+        DB::table('movies')->insert([
+            [
+                'movie_name' => 'KGF',
+                'rating' => 5,
+                'description' => 'Action Movie',
+                'release_date' => '2022-01-10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'movie_name' => 'Bahubali',
+                'rating' => 5,
+                'description' => 'Historical Action Movie',
+                'release_date' => '2015-07-10',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+
+            [
+                'movie_name' => 'Pushpa',
+                'rating' => 4,
+                'description' => 'Crime Action Movie',
+                'release_date' => '2021-12-17',
+                'created_at' => now(),
+                'updated_at' => now()
+            ]
+        ]);
+    }
+}
+Understanding
+
+This part:
+
+DB::table('movies')->insert([
+
+means:
+
+Go to movies table and insert records.
+
+This:
+
+[
+    'movie_name' => 'KGF',
+    'rating' => 5,
+]
+
+means:
+
+Insert first row.
+
+This:
+
+[
+    'movie_name' => 'Bahubali',
+    'rating' => 5,
+]
+
+means:
+
+Insert second row.
+Step 3: Register Seeder
+
+Open:
+
+database/seeders/DatabaseSeeder.php
+
+Inside run():
+
+public function run(): void
+{
+    $this->call(MovieSeeder::class);
+}
+Step 4: Run Seeder
+php artisan db:seed
+
+or
+
+php artisan migrate:fresh --seed
+Result
+
+Movies table:
+
+id	movie_name	rating
+1	KGF	5
+2	Bahubali	5
+3	Pushpa	4
+Viva Question
+Difference Between Manual Seeder and Factory Seeder
+Manual Seeder
+DB::table('movies')->insert([
+    'movie_name' => 'KGF'
+]);
+You write the data yourself.
+Factory Seeder
+Movie::factory()->count(10)->create();
+Laravel generates fake data automatically.
+
 
 
 
