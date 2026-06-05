@@ -16,6 +16,7 @@ use App\Http\Controllers\StudentValidationController;
 use App\Http\Controllers\StudentCustomValidationController;
 use App\Http\Controllers\QueryStudentController;
 use App\Http\Controllers\MovieController;
+use App\Http\Controllers\MongoMovieController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -409,3 +410,9 @@ Route::get('/eloquent-movies', [MovieController::class, 'eloquentShowAll']);
 Route::get('/eloquent-movie/{id}', [MovieController::class, 'eloquentSingleMovie']);
 Route::get('/eloquent-update/{id}', [MovieController::class, 'eloquentUpdate']);
 Route::get('/eloquent-delete/{id}', [MovieController::class, 'eloquentDelete']);
+
+Route::get('/mongo-insert',[MongoMovieController::class,'insert']);
+Route::get('/mongo-movies', [MongoMovieController::class, 'show']);
+Route::get('/mongo-movie/{id}', [MongoMovieController::class, 'single']);
+Route::get('/mongo-update/{id}', [MongoMovieController::class, 'update']);
+Route::get('/mongo-delete/{id}', [MongoMovieController::class, 'delete']);
