@@ -106,7 +106,45 @@ Add this method in MovieController.php:
 
 
 
+What is Eloquent ORM?
 
+Instead of using table directly:
+
+DB::table('movies')->get();
+
+Eloquent uses Model:
+
+Movie::all();
+
+Meaning:
+
+Movie model talks to movies table
+Eloquent INSERT
+
+In MovieController.php, add this import:
+
+use App\Models\Movie;
+
+Quick Viva Questions
+What is Eloquent ORM?
+
+Eloquent ORM is Laravel's built-in Object Relational Mapper that allows us to interact with database tables using models.
+
+What does Movie::all() do?
+
+Fetches all records from the movies table.
+
+What does Movie::find(1) do?
+
+Finds the record whose primary key is 1.
+
+Why is $fillable used?
+
+To allow mass assignment for specific columns.
+
+Difference between Query Builder and Eloquent?
+Query Builder works directly with tables.
+Eloquent works through Models and is more object-oriented.
 
 
 

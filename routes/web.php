@@ -403,3 +403,9 @@ Route::get('/movies', [MovieController::class, 'showMovies']);
 Route::get('/movie/{id}', [MovieController::class, 'showSingleMovie']);
 Route::get('/update-movie/{id}', [MovieController::class, 'updateMovie']);
 Route::get('/delete-movie/{id}', [MovieController::class, 'deleteMovie']);
+
+Route::get('/eloquent-insert', [MovieController::class, 'eloquentInsert']);
+Route::get('/eloquent-movies', [MovieController::class, 'eloquentShowAll']);
+Route::get('/eloquent-movie/{id}', [MovieController::class, 'eloquentSingleMovie']);
+Route::get('/eloquent-update/{id}', [MovieController::class, 'eloquentUpdate']);
+Route::get('/eloquent-delete/{id}', [MovieController::class, 'eloquentDelete']);
