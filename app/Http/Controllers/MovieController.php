@@ -80,6 +80,15 @@ class MovieController extends Controller
         ]);
         return "Movie Updated Using Eloquent";
     }
+//     public function updateMovies()
+// {
+//     Movie::where('rating', 3)
+//           ->update([
+//               'rating' => 5
+//           ]);
+
+//     return "All movies updated";
+// }
 
     public function eloquentDelete($id){
         $movie=Movie::find($id);

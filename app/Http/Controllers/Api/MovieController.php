@@ -51,6 +51,16 @@ class MovieController extends Controller
             'data' => $movie
         ]);
     }
+
+    public function updateMovies(Request $request){
+        Movie::where('rating',3)
+        ->update([
+            'rating'=>5
+        ]);
+        return response()->json([
+            'message'=>'Movies updated successfully'
+        ]);
+    }
     
     public function destroy($id){
         $movie=Movie::find($id);
