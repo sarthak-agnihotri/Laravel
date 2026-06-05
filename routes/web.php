@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\App;//localization
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\StudentValidationController;
 use App\Http\Controllers\StudentCustomValidationController;
+use App\Http\Controllers\QueryStudentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -378,14 +379,20 @@ Route::get('/logout',function(){
 });
 
 //Form Validation using CSRF and @Method
-Route::get('/student',[StudentController::class,'create']);
-Route::post('/student',[StudentController::class,'store']);
-Route::put('/student',[StudentController::class,'update']);
-Route::delete('/student',[StudentController::class,'destroy']);
+// Route::get('/student',[StudentController::class,'create']);
+// Route::post('/student',[StudentController::class,'store']);
+// Route::put('/student',[StudentController::class,'update']);
+// Route::delete('/student',[StudentController::class,'destroy']);
 
-//Form Validation using validation rules
-Route::get('/create',[StudentValidationController::class,'create']);
-Route::post('/show',[StudentValidationController::class,'show']);
-//Form Validation using Custom validation rules
-Route::get('/create',[StudentCustomValidationController::class,'create']);
-Route::post('/show',[StudentCustomValidationController::class,'show']);
+// //Form Validation using validation rules
+// Route::get('/create',[StudentValidationController::class,'create']);
+// Route::post('/show',[StudentValidationController::class,'show']);
+// //Form Validation using Custom validation rules
+// Route::get('/create',[StudentCustomValidationController::class,'create']);
+// Route::post('/show',[StudentCustomValidationController::class,'show']);
+
+Route::get('/query-insert',[QueryStudentController::class,'insertStudent']);
+Route::get('/query-students',[QueryStudentController::class,'showStudents']);
+Route::get('/query-student/{id}', [QueryStudentController::class, 'showSingleStudent']);
+Route::get('/query-update/{id}', [QueryStudentController::class, 'updateStudent']);
+Route::get('/query-delete/{id}', [QueryStudentController::class, 'deleteStudent']);
