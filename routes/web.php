@@ -17,7 +17,7 @@ use App\Http\Controllers\StudentCustomValidationController;
 use App\Http\Controllers\QueryStudentController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MongoMovieController;
-
+use App\Http\Controllers\MongoStudentController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -416,3 +416,9 @@ Route::get('/mongo-movies', [MongoMovieController::class, 'show']);
 Route::get('/mongo-movie/{id}', [MongoMovieController::class, 'single']);
 Route::get('/mongo-update/{id}', [MongoMovieController::class, 'update']);
 Route::get('/mongo-delete/{id}', [MongoMovieController::class, 'delete']);
+
+Route::get('/mongo-student-insert',[MongoStudentController::class,'insert']);
+Route::get('/mongo-student',[MongoStudentController::class,'show']);
+Route::get('/mongo-student/{id}',[MongoStudentController::class,'single']);
+Route::get('/mongo-student-update/{id}',[MongoStudentController::class,'update']);
+Route::get('/mongo-student-delete/{id}',[MongoStudentController::class,'delete']);
