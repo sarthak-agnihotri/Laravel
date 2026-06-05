@@ -282,6 +282,14 @@ Factory Seeder
 Movie::factory()->count(10)->create();
 Laravel generates fake data automatically.
 
+REST API
+first run (php artisan make:controller Api/MovieController)
+next add models at top(use App\Models\Movie)
+next run (php artisan intstall:api) to add api.php
+remove user part and import controller and then run (php artisan route:list)
+post,put, and delete ke liye postman use kerna hai
+
+
 
 
 
