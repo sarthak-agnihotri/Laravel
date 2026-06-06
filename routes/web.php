@@ -20,6 +20,7 @@ use App\Http\Controllers\MongoMovieController;
 use App\Http\Controllers\MongoStudentController;
 use App\Http\Controllers\AnalyticsController;
 use App\Mail\WelcomeMail;
+use App\Models\Document;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -511,4 +512,25 @@ Route::get('/theme/{mode}',function($mode){
 Route::get('/q4b',function(Request $request){
     $theme=$request->cookie('theme','light');
     return view('q4b',compact('theme'));
+});
+
+Route::get('/q5a',function(){
+    return view('q5a');
+});
+Route::post('/q5a-submit',function(Request $request){
+    $request->validate([
+        'pdf'=>'required|mimes:pdf|max:5120'
+    ]);
+    $path=$request->file('pdf')->store('pdfs','public');
+    Document::create([
+        'pdf_path'=>$path
+    ]);
+    // return "PDF Uploaded Successfully";
+    return redirect('/pdf-list');
+});
+Route::get('/pdf-list', function () {
+
+    $documents = Document::all();
+
+    return view('pdf-list', compact('documents'));
 });
