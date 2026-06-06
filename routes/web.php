@@ -18,6 +18,7 @@ use App\Http\Controllers\QueryStudentController;
 use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MongoMovieController;
 use App\Http\Controllers\MongoStudentController;
+use App\Http\Controllers\AnalyticsController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -422,3 +423,5 @@ Route::get('/mongo-student',[MongoStudentController::class,'show']);
 Route::get('/mongo-student/{id}',[MongoStudentController::class,'single']);
 Route::get('/mongo-student-update/{id}',[MongoStudentController::class,'update']);
 Route::get('/mongo-student-delete/{id}',[MongoStudentController::class,'delete']);
+
+Route::get('/analytics',[AnalyticsController::class,'index']);

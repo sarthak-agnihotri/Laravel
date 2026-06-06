@@ -3,7 +3,8 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\CheckRole;
+//use App\Http\Middleware\CheckRole;
+use App\Http\Middleware\LogPageView;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -15,7 +16,8 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         //
         //$middleware->append(CheckRole::class);
-        $middleware->alias(['check.login' => \App\Http\Middleware\CheckLogin::class]);
+        // $middleware->alias(['check.login' => \App\Http\Middleware\CheckLogin::class]);
+        $middleware->append(LogPageView::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
