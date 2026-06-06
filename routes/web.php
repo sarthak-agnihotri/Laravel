@@ -24,6 +24,7 @@ use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Authentication;
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -571,3 +572,14 @@ Route::post('/q6-logout',function(Request $request){
     return redirect('/q6');
 });
 
+// Question 7b
+Route::get('/set-admin',function(){
+    session(['role'=>'admin']);
+    return "Admin Session Set";
+});
+
+Route::middleware(['admin'])->group(function(){
+    Route::get('/admin/dashboard', function () {
+        return "Welcome Admin";
+    });
+});
