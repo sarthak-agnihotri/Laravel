@@ -493,3 +493,22 @@ Route::get('/send-mail',function(){
     Mail::to('sarthak.agnihotri2003@gmail.com')->send(new WelcomeMail('Sarthak'));
     return "Email added to queue";
 });
+
+Route::get('/q4',function(){
+    return view('q4home');
+})->name('q4.home');
+Route::get('/q4/about',function(){
+    return view('q4about');
+})->name('q4.about');
+Route::get('/q4/contact',function(){
+    return view('q4contact');
+})->name('q4.contact');
+
+
+Route::get('/theme/{mode}',function($mode){
+    return redirect('/q4b')->cookie('theme',$mode,60);
+});
+Route::get('/q4b',function(Request $request){
+    $theme=$request->cookie('theme','light');
+    return view('q4b',compact('theme'));
+});
