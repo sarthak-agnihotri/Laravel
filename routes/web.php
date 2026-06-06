@@ -445,3 +445,31 @@ Route::get('/go-last',function(){
     return redirect(session('last-page','/q2'));
 });
 
+//Question 2
+Route::get('/q3a',function(){
+    return view('q3a');
+});
+Route::post('/q3a-submit',function(Request $request){
+    $request->validate([
+        'username'=>'required|min:6',
+        'email'=>'required|email',
+        'password' => [
+            'required',
+            'regex:/^(?=.*[A-Z])(?=.*[0-9])(?=.*[@$!%*?&]).+$/'
+        ]
+    ],
+        [
+        'username.required' => 'Username is required',
+        'username.min' => 'Username must be at least 6 characters',
+
+        'email.required' => 'Email is required',
+        'email.email' => 'Enter valid email address',
+        'email.unique' => 'This email already exists',
+
+        'password.required' => 'Password is required',
+        'password.min' => 'Password must be at least 6 characters',
+        'password.regex' => 'Password must contain uppercase letter, number and special character',
+        ]
+    );
+    return "Form Submitted Successfully";
+});
