@@ -24,6 +24,7 @@ use App\Models\Document;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Authentication;
+use App\Models\Programmer;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -582,4 +583,26 @@ Route::middleware(['admin'])->group(function(){
     Route::get('/admin/dashboard', function () {
         return "Welcome Admin";
     });
+});
+
+// Question 8
+Route::get('/q8',function(){
+    return view('q8');
+});
+Route::post('/q8-submit',function(Request $request){
+    $request->validate([
+        'name'=>'required|alpha',
+        'age'=>'required|numeric|min:18',
+        'language'=>'required|in:PHP,JavaScript,Python'
+    ]);
+    Programmer::create([
+        'name'=>$request->name,
+        'age'=>$request->age,
+        'language'=>$request->language
+    ]);
+    return redirect('/q8-list');
+});
+Route::get('/q8-list',function(){
+    $programmers=Programmer::all();
+    return view('q8-list',compact('programmers'));
 });

@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('programmers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->integer('age');
+            $table->string('language');
             $table->timestamps();
         });
     }
