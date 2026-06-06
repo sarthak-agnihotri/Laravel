@@ -473,3 +473,17 @@ Route::post('/q3a-submit',function(Request $request){
     );
     return "Form Submitted Successfully";
 });
+
+Route::get('/q3', function () {
+    return view('q3');
+});
+Route::post('/q3-submit',function(Request $request){
+    $request->validate([
+        'images'=>'required',
+        'images.*'=>'image|mimes:jpg,jpeg,png|max:3072'
+    ]);
+    foreach ($request->file('images') as $image){
+        $image->store('uploads','public');
+    }
+    return "Images Uploaded successfully";
+});
