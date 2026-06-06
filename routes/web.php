@@ -425,3 +425,23 @@ Route::get('/mongo-student-update/{id}',[MongoStudentController::class,'update']
 Route::get('/mongo-student-delete/{id}',[MongoStudentController::class,'delete']);
 
 Route::get('/analytics',[AnalyticsController::class,'index']);
+//Question 1
+Route::get('/change/{lang}',function($lang){
+    App::setLocale($lang);
+    return view ('q1');
+});
+Route::get('/q2',function(){
+    return view ('q2home');
+});
+Route::get('/q2/about',function(){
+    session(['last-page'=>'/q2/about']);
+    return view('q2about');
+});
+Route::get('/q2/contact', function () {
+    session(['last-page' => '/q2/contact']);
+    return view('q2contact');
+});
+Route::get('/go-last',function(){
+    return redirect(session('last-page','/q2'));
+});
+
