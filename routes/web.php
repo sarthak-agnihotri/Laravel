@@ -19,6 +19,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\MongoMovieController;
 use App\Http\Controllers\MongoStudentController;
 use App\Http\Controllers\AnalyticsController;
+use App\Mail\WelcomeMail;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -486,4 +487,9 @@ Route::post('/q3-submit',function(Request $request){
         $image->store('uploads','public');
     }
     return "Images Uploaded successfully";
+});//php artisan storage:link
+
+Route::get('/send-mail',function(){
+    Mail::to('sarthak.agnihotri2003@gmail.com')->send(new WelcomeMail('Sarthak'));
+    return "Email added to queue";
 });
