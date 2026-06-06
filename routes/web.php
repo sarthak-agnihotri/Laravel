@@ -21,6 +21,9 @@ use App\Http\Controllers\MongoStudentController;
 use App\Http\Controllers\AnalyticsController;
 use App\Mail\WelcomeMail;
 use App\Models\Document;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use App\Models\Authentication;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -534,3 +537,37 @@ Route::get('/pdf-list', function () {
 
     return view('pdf-list', compact('documents'));
 });
+
+// Question 6
+Route::get('/create-user',function(){
+    Authentication::create([
+        'username'=>'Sarthak123',
+        'email'=>'sarthak@gmail.com',
+        'password'=>Hash::make('admin123')
+    ]);
+    return "User Created Successfully";
+});
+Route::get('/q6',function(){
+    return view('q6login');
+});
+Route::post('/q6-login',function(Request $request){
+    $request->validate([
+        'login'=>'required',
+        'password'=>'required'
+    ]);
+    $field=filter_var($request->login,FILTER_VALIDATE_EMAIL)?'email':'username';
+    $user=Authentication::where($field,$request->login)->first();
+    if($user && Hash::check($request->password,$user->password)){
+        session(['user_id'=>$user->id]);
+        return redirect('/q6dashboard');
+    }
+    return back()->with('error','Invalid email/username or password');
+});
+Route::get('/q6dashboard',function(){
+    return view("q6dashboard");
+});
+Route::post('/q6-logout',function(Request $request){
+    $request->session()->flush();
+    return redirect('/q6');
+});
+
