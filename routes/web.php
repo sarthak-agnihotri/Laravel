@@ -389,17 +389,17 @@ Route::get('/logout',function(){
 });
 
 //Form Validation using CSRF and @Method
-// Route::get('/student',[StudentController::class,'create']);
-// Route::post('/student',[StudentController::class,'store']);
-// Route::put('/student',[StudentController::class,'update']);
-// Route::delete('/student',[StudentController::class,'destroy']);
+Route::get('/student',[StudentController::class,'create']);
+Route::post('/student',[StudentController::class,'store']);
+Route::put('/student',[StudentController::class,'update']);
+Route::delete('/student',[StudentController::class,'destroy']);
 
 // //Form Validation using validation rules
-// Route::get('/create',[StudentValidationController::class,'create']);
-// Route::post('/show',[StudentValidationController::class,'show']);
-// //Form Validation using Custom validation rules
-// Route::get('/create',[StudentCustomValidationController::class,'create']);
-// Route::post('/show',[StudentCustomValidationController::class,'show']);
+Route::get('/create',[StudentValidationController::class,'create']);
+Route::post('/show',[StudentValidationController::class,'show']);
+//Form Validation using Custom validation rules
+Route::get('/create',[StudentCustomValidationController::class,'create']);
+Route::post('/show',[StudentCustomValidationController::class,'show']);
 
 Route::get('/query-insert',[QueryStudentController::class,'insertStudent']);
 Route::get('/query-students',[QueryStudentController::class,'showStudents']);
@@ -609,3 +609,19 @@ Route::get('/q8-list',function(){
 
 // Question 9
 Route::resource('students',StudentsController::class);
+
+//Domain
+Route::domain('admin.example.com')->group(function(){
+    Route::get('/dash',function(){
+        return "Admin Dashboard";
+    });
+});//iske baad C:\Windows\System32\drivers\etc\hosts mai jake 127.0.0.1 admin.example.com add karo then run
+Route::domain('{subdomain}.example.com')->group(function(){
+    Route::get('/d',function($subdomain){
+        return "Welcomr to ".$subdomain;
+    });
+});
+//URL
+Route::get('/test', function () {
+    return view('test1');
+});

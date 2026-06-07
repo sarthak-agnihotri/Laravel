@@ -82,7 +82,7 @@ class MovieController extends Controller
     }
 //     public function updateMovies()
 // {
-//     Movie::where('rating', 3)
+//     Movie::where('rating', 3) 
 //           ->update([
 //               'rating' => 5
 //           ]);

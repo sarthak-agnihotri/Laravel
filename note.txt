@@ -148,7 +148,7 @@ Eloquent works through Models and is more object-oriented.
 
 FACTORY
 
-PS C:\Users\Administrator\Practice> php artisan make:factory MovieFactory --model=Movie
+php artisan make:factory MovieFactory --model=Movie
 What is a Factory?
 
 Simple definition:
@@ -156,7 +156,6 @@ Simple definition:
 Factory is used to generate fake/dummy data automatically.
 
 phir model file mai 'hasfactory' add karo
-
 
 uske baad dataseeder open karo
 import model file at top
@@ -434,3 +433,5 @@ updated_at
 Q5. What does $table->id() create?
 Primary Key
 Auto Increment ID
+
+php artisan make:controller ProductController --invokable
