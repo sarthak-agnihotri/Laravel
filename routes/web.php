@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Authentication;
 use App\Models\Programmer;
-
+use App\Http\Controllers\StudentsController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -606,3 +606,6 @@ Route::get('/q8-list',function(){
     $programmers=Programmer::all();
     return view('q8-list',compact('programmers'));
 });
+
+// Question 9
+Route::resource('students',StudentsController::class);
