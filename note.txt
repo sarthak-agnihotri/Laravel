@@ -435,3 +435,13 @@ Primary Key
 Auto Increment ID
 
 php artisan make:controller ProductController --invokable
+
+
+
+restapi->Product
+sabse pehle php artisan make:model Product -m(migration)
+uske baad migeration mai add karo
+phir php artisan migrate
+then model mai fillable add karo
+phir controller create karo api/productcontroller
+then import model at top
