@@ -27,6 +27,7 @@ use App\Models\Authentication;
 use App\Models\Programmer;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\LanguageController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -630,4 +631,21 @@ Route::domain('{subdomain}.example.com')->group(function(){
 //URL
 Route::get('/test', function () {
     return view('test1');
+});
+
+//cookie
+Route::get('/set-language/{lang}',[LanguageController::class,'setLanguage']);
+
+Route::get('/get-language',[LanguageController::class,'getLanguage']);
+Route::get('/language', function(){
+
+    return '
+    <h2>Select Language</h2>
+
+    <a href="/set-language/english">English</a><br><br>
+
+    <a href="/set-language/hindi">Hindi</a><br><br>
+
+    <a href="/set-language/spanish">Spanish</a>
+    ';
 });
