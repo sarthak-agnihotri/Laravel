@@ -6,6 +6,7 @@ use Illuminate\Foundation\Configuration\Middleware;
 //use App\Http\Middleware\CheckRole;
 use App\Http\Middleware\LogPageView;
 use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\AddCustomHeader;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -19,7 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         //$middleware->append(CheckRole::class);
         // $middleware->alias(['check.login' => \App\Http\Middleware\CheckLogin::class]);
         // $middleware->append(LogPageView::class);
-        $middleware->alias(['admin'=>AdminMiddleware::class]);
+        // $middleware->alias(['admin'=>AdminMiddleware::class]);
+        $middleware->alias(['custom.header'=>AddCustomHeader::class]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

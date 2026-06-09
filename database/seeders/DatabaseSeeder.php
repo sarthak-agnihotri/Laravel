@@ -26,3 +26,4 @@ class DatabaseSeeder extends Seeder
         Movie::factory()->count(10)->create();
     }
 }
+//php artisan migrate:fresh --seed

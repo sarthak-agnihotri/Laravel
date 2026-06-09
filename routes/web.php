@@ -26,6 +26,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Authentication;
 use App\Models\Programmer;
 use App\Http\Controllers\StudentsController;
+use App\Http\Controllers\DataController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -610,6 +611,11 @@ Route::get('/q8-list',function(){
 // Question 9
 Route::resource('students',StudentsController::class);
 
+//Question 10
+Route::get('/q10',[DataController::class,'show']);
+Route::get('/header-test',function(){
+    return response('Custom header added successfully');
+})->middleware('custom.header');
 //Domain
 Route::domain('admin.example.com')->group(function(){
     Route::get('/dash',function(){
