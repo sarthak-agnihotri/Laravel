@@ -28,6 +28,7 @@ use App\Models\Programmer;
 use App\Http\Controllers\StudentsController;
 use App\Http\Controllers\DataController;
 use App\Http\Controllers\LanguageController;
+use App\Http\Controllers\JobController;
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -617,6 +618,7 @@ Route::get('/q10',[DataController::class,'show']);
 Route::get('/header-test',function(){
     return response('Custom header added successfully');
 })->middleware('custom.header');
+
 //Domain
 Route::domain('admin.example.com')->group(function(){
     Route::get('/dash',function(){
@@ -649,3 +651,15 @@ Route::get('/language', function(){
     <a href="/set-language/spanish">Spanish</a>
     ';
 });
+
+//create a job application form and create a job controller
+// a. define an index method that returns a blade template jobs.blade.php listing available job openings.
+//b. creata a method apply in job controller that accepts a job id as a parameter.
+Route::get('/jobs', [JobController::class, 'index'])
+    ->name('jobs.index');
+
+Route::get('/jobs/{id}/apply', [JobController::class, 'apply'])
+    ->name('jobs.apply');
+
+Route::post('/jobs/{id}/apply', [JobController::class, 'submitApplication'])
+    ->name('jobs.submit');
